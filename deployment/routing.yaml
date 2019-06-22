@@ -1,0 +1,45 @@
+apiVersion: networking.istio.io/v1alpha3
+kind: Gateway
+metadata:
+  name: russia-gateway
+spec:
+  selector:
+    istio: ingressgateway
+  servers:
+  - port:
+      number: 80
+      name: http
+      protocol: HTTP
+    hosts:
+    - "*"
+---
+
+apiVersion: networking.istio.io/v1alpha3
+kind: VirtualService
+metadata:
+  name: russia
+spec:
+  hosts:
+  - "*"
+  gateways:
+  - russia-gateway
+  http:
+  - route:
+    - destination:
+        host: russia
+        port:
+          number: 9080
+        subset: v1
+---
+
+apiVersion: networking.istio.io/v1alpha3
+kind: DestinationRule
+metadata:
+  name: russia
+spec:
+  host: russia
+  subsets:
+  - name: v1
+    labels:
+      version: v1
+---

@@ -1,0 +1,19 @@
+
+
+          Java EE             MicroProfile
+          -------             ------------
+          JAX-RS              JAX-RS    
+          CDI                 CDI
+          JPA                 MicroProfile Config
+          EJB
+
+             \               /
+              \             /
+               ┘           └
+                  Liberty
+                  ------
+
+                  supports:
+                  • Java EE
+                  • MicroProfile
+                  • combinations (mix & match)
